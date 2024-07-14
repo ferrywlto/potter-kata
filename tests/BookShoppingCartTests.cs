@@ -208,5 +208,17 @@ public class BookShoppingCartTests
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
         Assert.Equal(expected, actual);
-    }      
+    }  
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 2, 1 })]
+    [InlineData(new int[] { 5, 4, 3, 4, 5 })]
+    public void Calculate_OnOneSetOfThreeDifferentBooksPlusOneSetOfTwoDifferentBooks_ShouldApplyTenPercentsDiscountsThenApplyFivePercentsDiscounts(int[] bookIds)
+    {
+        const double expected = 3 * 8 * 0.9 + 2 * 8 * 0.95;
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds) sut.Add(id);
+        var actual = sut.Calculate();
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+    }    
 }

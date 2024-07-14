@@ -6,6 +6,7 @@ When receiving the 'exit' command the program will calculate and display the tot
 The program assume the following:
 - It will always attempt to calculate the highest discount (i.e 5 different books) first.
 - Invalid book id input will get ignored instead of terminating the program.
+- Results are rounded to two decimal places.
 
 ## Getting started
 

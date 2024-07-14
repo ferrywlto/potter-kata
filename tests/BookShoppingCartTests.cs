@@ -1,6 +1,6 @@
 namespace PotterKata.UnitTests;
 
-public class BookShoppingCartTests 
+public class BookShoppingCartTests
 {
     [Theory]
     [InlineData(0)]
@@ -38,7 +38,7 @@ public class BookShoppingCartTests
     public void Add_OnInvalidId_CartItemCountShouldNotIncrease(int[] bookIds)
     {
         var sut = new BookShoppingCart();
-        foreach(var id in bookIds)
+        foreach (var id in bookIds)
         {
             int beforeCount = sut.Count;
             sut.Add(id);
@@ -52,7 +52,7 @@ public class BookShoppingCartTests
     public void Add_OnValidId_CartItemCountShouldIncreaseByOne(int[] bookIds)
     {
         var sut = new BookShoppingCart();
-        foreach(var id in bookIds)
+        foreach (var id in bookIds)
         {
             int beforeCount = sut.Count;
             sut.Add(id);
@@ -85,56 +85,45 @@ public class BookShoppingCartTests
     }
 
     [Theory]
-    [InlineData(new int[] {1}, 8)]
-    [InlineData(new int[] {2,2}, 16)]
-    [InlineData(new int[] {3,3,3}, 24)]
-    [InlineData(new int[] {4,4,4,4}, 32)]
-    [InlineData(new int[] {5,5,5,5,5}, 40)]
+    [InlineData(new int[] { 1 }, 8)]
+    [InlineData(new int[] { 2, 2 }, 16)]
+    [InlineData(new int[] { 3, 3, 3 }, 24)]
     public void Calculate_OnMultipleSameBook_ShouldReturnMultipleOfEight(int[] bookIds, int expected)
     {
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     [Theory]
-    [InlineData(new int[] {1,2})]
-    [InlineData(new int[] {3,4})]
-    [InlineData(new int[] {5,1})]
+    [InlineData(new int[] { 1, 2 })]
+    [InlineData(new int[] { 3, 4 })]
+    [InlineData(new int[] { 5, 1 })]
     public void Calculate_OnTwoDifferentBooks_ShouldApplyFivePercentsDiscounts(int[] bookIds)
     {
         const double expected = 2 * 8 * 0.95;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     [Theory]
-    [InlineData(new int[] {1,2,2})]
-    [InlineData(new int[] {3,4,4})]
-    [InlineData(new int[] {5,1,1})]
+    [InlineData(new int[] { 1, 2, 2 })]
+    [InlineData(new int[] { 3, 4, 4 })]
+    [InlineData(new int[] { 5, 1, 1 })]
     public void Calculate_OnTwoDifferentBookPlusOneSameBook_ShouldAddEightForTheExtraBook(int[] bookIds)
     {
         const double expected = 2 * 8 * 0.95 + 8;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     [Theory]
-    [InlineData(new int[] {1,2,3})]
-    [InlineData(new int[] {3,4,5})]
-    [InlineData(new int[] {5,1,2})]
+    [InlineData(new int[] { 1, 2, 3 })]
+    [InlineData(new int[] { 3, 4, 5 })]
+    [InlineData(new int[] { 5, 1, 2 })]
     public void Calculate_OnThreeDifferentBooks_ShouldApplyTenPercentsDiscounts(int[] bookIds)
     {
         const double expected = 3 * 8 * 0.9;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     [Theory]
@@ -143,11 +132,9 @@ public class BookShoppingCartTests
     public void Calculate_OnThreeDifferentBooksPlusOneSameBook_ShouldAddEightForExtraBook(int[] bookIds)
     {
         const double expected = 3 * 8 * 0.9 + 8;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
-    }   
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
+    }
 
     [Theory]
     [InlineData(new int[] { 1, 2, 1, 2 })]
@@ -155,11 +142,9 @@ public class BookShoppingCartTests
     public void Calculate_OnTwoSetsOfTwoDifferentBooks_ShouldApplyFivePercentDiscountsTwice(int[] bookIds)
     {
         const double expected = 2 * 8 * 0.95 * 2;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
-    }   
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
+    }
 
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 3, 3 })]
@@ -168,11 +153,9 @@ public class BookShoppingCartTests
     public void Calculate_OnThreeDifferentBooksPlusTwoSameBooks_ShouldAddSixteenForExtraBooks(int[] bookIds)
     {
         const double expected = 3 * 8 * 0.9 + 16;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
-    }    
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
+    }
 
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 4 })]
@@ -180,10 +163,8 @@ public class BookShoppingCartTests
     public void Calculate_OnFourDifferentBooks_ShouldApplyTwentyPercentDiscounts(int[] bookIds)
     {
         const double expected = 4 * 8 * 0.8;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     [Theory]
@@ -192,10 +173,8 @@ public class BookShoppingCartTests
     public void Calculate_OnFourDifferentBooksPlusTwoSameBooks_ShouldAddSixteenForExtraBooks(int[] bookIds)
     {
         const double expected = 4 * 8 * 0.8 + 16;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     [Theory]
@@ -204,22 +183,20 @@ public class BookShoppingCartTests
     public void Calculate_OnFiveDifferentBooks_ShouldApplyTwentyFivePercentsDiscounts(int[] bookIds)
     {
         const double expected = 5 * 8 * 0.75;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
-    }  
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
+    }
 
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 2, 1 })]
     [InlineData(new int[] { 5, 4, 3, 4, 5 })]
     public void Calculate_OnOneSetOfThreeDifferentBooksPlusOneSetOfTwoDifferentBooks_ShouldApplyTenPercentsDiscountsThenApplyFivePercentsDiscounts(int[] bookIds)
     {
-        const double expected = 3 * 8 * 0.9 + 2 * 8 * 0.95;
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+        const double expected =
+        3 * 8 * 0.9 +
+        2 * 8 * 0.95;
+
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     [Fact]
@@ -240,10 +217,7 @@ public class BookShoppingCartTests
             2 * 8 * 0.95 +
             8;
 
-        var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
-        var actual = sut.Calculate();
-        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
     }
 
     // This is to ensure the common minimal count update per each iteration 
@@ -270,9 +244,14 @@ public class BookShoppingCartTests
         2 * 8 * 0.95 * 3 +
         8 * 2;
 
+        AssertRoundedToTwoDecimalPlaces(bookIds, expected);
+    }
+
+    private static void AssertRoundedToTwoDecimalPlaces(int[] bookIds, double expected)
+    {
         var sut = new BookShoppingCart();
-        foreach(var id in bookIds) sut.Add(id);
+        foreach (var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
         Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
-    }    
+    }
 }

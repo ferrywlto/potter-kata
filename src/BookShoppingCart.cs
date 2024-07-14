@@ -22,18 +22,18 @@ public class BookShoppingCart
 
         double cost = 0;
         var groups = cartItems.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count());
-        var minCommonCount = groups.Min(x => x.Value);
 
         while(groups.Count > 0)
         {
+            var minCommonCount = groups.Min(x => x.Value);
             cost += minCommonCount * groups.Count * baseBookPriceInEuro * DetermineDiscount(groups.Count);
-            
+
             var emptyBookIds = new List<int>();
             foreach(var group in groups)
             {
                 groups[group.Key] -= minCommonCount;
 
-                if (groups[group.Key] == 0)
+                if (groups[group.Key] <= 0)
                     emptyBookIds.Add(group.Key);
             }
             foreach (var bookId in emptyBookIds)

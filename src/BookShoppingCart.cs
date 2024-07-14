@@ -25,13 +25,13 @@ public class BookShoppingCart
             .GroupBy(x => x)
             .ToDictionary(g => g.Key, g => g.Count());
 
-        while(bookFrequencies.Count > 0)
+        while (bookFrequencies.Count > 0)
         {
             var minCommonCount = bookFrequencies.Min(x => x.Value);
             cost += GetDiscountedPrice(minCommonCount, bookFrequencies.Count);
 
             var emptyBookIds = new List<int>();
-            foreach(var group in bookFrequencies)
+            foreach (var group in bookFrequencies)
             {
                 bookFrequencies[group.Key] -= minCommonCount;
 
@@ -51,7 +51,7 @@ public class BookShoppingCart
         5 => fiveDifferentBooksDiscount,
         _ => noDiscount
     };
-    
-    private double GetDiscountedPrice(int bookCount, int numDiffBooks) 
+
+    private double GetDiscountedPrice(int bookCount, int numDiffBooks)
         => bookCount * numDiffBooks * baseBookPriceInEuro * DetermineDiscount(numDiffBooks);
 }

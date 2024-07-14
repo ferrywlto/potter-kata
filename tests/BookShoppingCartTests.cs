@@ -60,4 +60,27 @@ public class BookShoppingCartTests
             Assert.Equal(beforeCount + 1, afterCount);
         }
     }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
+    public void Calculate_OnAnySingleBook_ShouldReturnEight(int bookId)
+    {
+        var sut = new BookShoppingCart();
+        sut.Add(bookId);
+
+        var actual = sut.Calculate();
+        Assert.Equal(8, actual);
+    }
+
+    [Fact]
+    public void Calculate_OnEmptyCart_ShouldReturnZero()
+    {
+        var sut = new BookShoppingCart();
+        var actual = sut.Calculate();
+        Assert.Equal(0, actual);
+    }
 }

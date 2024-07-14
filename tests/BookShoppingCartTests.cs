@@ -32,4 +32,32 @@ public class BookShoppingCartTests
         var actual = sut.Add(bookId);
         Assert.True(actual);
     }
+
+    [Theory]
+    [InlineData(new int[] { 0, -1, 6, 10 })]
+    public void Add_OnInvalidId_CartItemCountShouldNotIncrease(int[] bookIds)
+    {
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds)
+        {
+            int beforeCount = sut.Count;
+            sut.Add(id);
+            int afterCount = sut.Count;
+            Assert.Equal(beforeCount, afterCount);
+        }
+    }
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 4, 5 })]
+    public void Add_OnValidId_CartItemCountShouldIncreaseByOne(int[] bookIds)
+    {
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds)
+        {
+            int beforeCount = sut.Count;
+            sut.Add(id);
+            int afterCount = sut.Count;
+            Assert.Equal(beforeCount + 1, afterCount);
+        }
+    }
 }

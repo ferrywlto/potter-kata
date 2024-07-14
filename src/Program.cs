@@ -10,4 +10,4 @@ do
 }
 while ((input = Console.ReadLine()?.ToLower()) != "exit");
 
-Console.WriteLine($"The total of the cart is: £{10}");
+Console.WriteLine($"The total amount of the cart is: €{10}");

@@ -32,3 +32,10 @@ Add a book to cart (input 'exit' to finish): 1
 Add a book to cart (input 'exit' to finish): exit
 The total amount of the cart is: €8
 ```
+
+## Test Coverage
+```xml
+<package name="PotterKata" line-rate="1" branch-rate="1" complexity="40">
+<class name="BookShoppingCart" filename="BookShoppingCart.cs" line-rate="1" branch-rate="1" complexity="22">
+<class name="Program" filename="Program.cs" line-rate="1" branch-rate="1" complexity="18">
+```

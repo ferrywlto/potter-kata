@@ -3,6 +3,7 @@ name: Potter Kata Bookstore CI
 on:
   push:
     branches: [ "master" ]
+    paths-ignore: [ "README.md", ".github/**" ] 
   pull_request:
     branches: [ "master" ]
 

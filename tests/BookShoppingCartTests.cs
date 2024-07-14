@@ -104,7 +104,7 @@ public class BookShoppingCartTests
     [InlineData(new int[] {3,4})]
     [InlineData(new int[] {4,5})]
     [InlineData(new int[] {5,1})]
-    public void Calculate_OnTwoDifferentBooks_ShouldHaveFivePercentsDiscounts(int[] bookIds)
+    public void Calculate_OnTwoDifferentBooks_ShouldApplyFivePercentsDiscounts(int[] bookIds)
     {
         const double expected = 2 * 8 * 0.95;
         var sut = new BookShoppingCart();
@@ -128,5 +128,18 @@ public class BookShoppingCartTests
         Assert.Equal(expected, actual);
     }
 
-    
+    [Theory]
+    [InlineData(new int[] {1,2,3})]
+    [InlineData(new int[] {2,3,4})]
+    [InlineData(new int[] {3,4,5})]
+    [InlineData(new int[] {4,5,1})]
+    [InlineData(new int[] {5,1,2})]
+    public void Calculate_OnThreeDifferentBooks_ShouldApplyTenPercentsDiscounts(int[] bookIds)
+    {
+        const double expected = 3 * 8 * 0.9;
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds) sut.Add(id);
+        var actual = sut.Calculate();
+        Assert.Equal(expected, actual);
+    }
 }

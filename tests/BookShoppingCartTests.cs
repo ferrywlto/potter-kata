@@ -220,5 +220,29 @@ public class BookShoppingCartTests
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
         Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
-    }    
+    }
+
+    [Fact]
+    public void Calculate_OnOneSetForEachDiscountGroup_ReturnCorrectResult()
+    {
+        var bookIds = new int[]
+        {
+            1, 2, 3, 4, 5,
+            1, 2, 3, 4,
+            1, 2, 3,
+            1, 2,
+            1
+        };
+        const double expected =
+            5 * 8 * 0.75 +
+            4 * 8 * 0.8 +
+            3 * 8 * 0.9 +
+            2 * 8 * 0.95 +
+            8;
+            
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds) sut.Add(id);
+        var actual = sut.Calculate();
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
+    }
 }

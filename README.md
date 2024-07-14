@@ -2,7 +2,14 @@
 This program will ask for inputting the book id (1 to 5) one by one.
 When receiving the 'exit' command the program will calculate and display the total cost of the books in the cart. 
 
+## Assumptions
+The program assume the following:
+- It will always attempt to calculate the highest discount (i.e 5 different books) first.
+
 ## Getting started
+
+### Pre-requisite
+- .NET 8 SDK installed 
 
 ### Run the program
 ```bash

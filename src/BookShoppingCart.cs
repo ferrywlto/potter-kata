@@ -39,6 +39,10 @@ public class BookShoppingCart
                 {
                     cost += minCommonCount * 8 * 0.8;
                 }
+                else if (groups.Count == 5)
+                {
+                    cost += minCommonCount * 8 * 0.75;
+                }
                 groups[group.Key] -= minCommonCount;
 
                 if (groups[group.Key] == 0)

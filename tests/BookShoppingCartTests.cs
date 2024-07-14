@@ -83,4 +83,18 @@ public class BookShoppingCartTests
         var actual = sut.Calculate();
         Assert.Equal(0, actual);
     }
+
+    [Theory]
+    [InlineData(new int[] {1}, 8)]
+    [InlineData(new int[] {2,2}, 16)]
+    [InlineData(new int[] {3,3,3}, 24)]
+    [InlineData(new int[] {4,4,4,4}, 32)]
+    [InlineData(new int[] {5,5,5,5,5}, 40)]
+    public void Calculate_OnMultipleSameBook_ShouldReturnMultipleOfEight(int[] bookIds, int expected)
+    {
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds) sut.Add(id);
+        var actual = sut.Calculate();
+        Assert.Equal(expected, actual);
+    }
 }

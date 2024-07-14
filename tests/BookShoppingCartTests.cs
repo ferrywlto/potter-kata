@@ -144,6 +144,30 @@ public class BookShoppingCartTests
     }
 
     [Theory]
+    [InlineData(new int[] { 1, 2, 3, 1 })]
+    [InlineData(new int[] { 2, 3, 4, 2 })]
+    public void Calculate_OnThreeDifferentBooksPlusOneSameBook_ShouldAddEightForExtraBook(int[] bookIds)
+    {
+        const double expected = 3 * 8 * 0.9 + 8;
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds) sut.Add(id);
+        var actual = sut.Calculate();
+        Assert.Equal(expected, actual);
+    }   
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 1, 2 })]
+    [InlineData(new int[] { 3, 2, 2, 3 })]
+    public void Calculate_OnTwoSetsOfTwoDifferentBooks_ShouldApplyFivePercentDiscountsTwice(int[] bookIds)
+    {
+        const double expected = 2 * 8 * 0.95 * 2;
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds) sut.Add(id);
+        var actual = sut.Calculate();
+        Assert.Equal(expected, actual);
+    }   
+
+    [Theory]
     [InlineData(new int[] { 1, 2, 3, 3, 3 })]
     [InlineData(new int[] { 2, 3, 4, 4, 4 })]
     [InlineData(new int[] { 3, 4, 5, 5, 5 })]
@@ -167,6 +191,21 @@ public class BookShoppingCartTests
     public void Calculate_OnFourDifferentBooks_ShouldApplyTwentyPercentDiscounts(int[] bookIds)
     {
         const double expected = 4 * 8 * 0.8;
+        var sut = new BookShoppingCart();
+        foreach(var id in bookIds) sut.Add(id);
+        var actual = sut.Calculate();
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 4, 4, 4 })]
+    [InlineData(new int[] { 2, 3, 4, 5, 5, 5 })]
+    [InlineData(new int[] { 3, 4, 5, 1, 1, 1 })]
+    [InlineData(new int[] { 4, 5, 1, 2, 2, 2 })]
+    [InlineData(new int[] { 5, 1, 2, 3, 2, 2 })]
+    public void Calculate_OnFourDifferentBooksPlusTwoSameBooks_ShouldAddSixteenForExtraBooks(int[] bookIds)
+    {
+        const double expected = 4 * 8 * 0.8 + 16;
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();

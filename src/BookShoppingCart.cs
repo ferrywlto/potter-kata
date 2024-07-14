@@ -9,35 +9,37 @@ public class BookShoppingCart
 
     private List<int> cartItems = [];
     public int Count => cartItems.Count;
+
     public bool Add(int bookId)
     {
         if (bookId < 1 || bookId > 5) return false;
         cartItems.Add(bookId);
         return true;
     }
-
     public double Calculate()
     {
         if (cartItems.Count == 0) return 0;
 
         double cost = 0;
-        var groups = cartItems.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count());
+        var bookFrequencies = cartItems
+            .GroupBy(x => x)
+            .ToDictionary(g => g.Key, g => g.Count());
 
-        while(groups.Count > 0)
+        while(bookFrequencies.Count > 0)
         {
-            var minCommonCount = groups.Min(x => x.Value);
-            cost += minCommonCount * groups.Count * baseBookPriceInEuro * DetermineDiscount(groups.Count);
+            var minCommonCount = bookFrequencies.Min(x => x.Value);
+            cost += GetDiscountedPrice(minCommonCount, bookFrequencies.Count);
 
             var emptyBookIds = new List<int>();
-            foreach(var group in groups)
+            foreach(var group in bookFrequencies)
             {
-                groups[group.Key] -= minCommonCount;
+                bookFrequencies[group.Key] -= minCommonCount;
 
-                if (groups[group.Key] <= 0)
+                if (bookFrequencies[group.Key] <= 0)
                     emptyBookIds.Add(group.Key);
             }
             foreach (var bookId in emptyBookIds)
-                groups.Remove(bookId);
+                bookFrequencies.Remove(bookId);
         }
         return cost;
     }
@@ -49,4 +51,7 @@ public class BookShoppingCart
         5 => fiveDifferentBooksDiscount,
         _ => noDiscount
     };
+    
+    private double GetDiscountedPrice(int bookCount, int numDiffBooks) 
+        => bookCount * numDiffBooks * baseBookPriceInEuro * DetermineDiscount(numDiffBooks);
 }

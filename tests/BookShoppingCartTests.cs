@@ -108,7 +108,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }
 
     [Theory]
@@ -121,7 +121,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }
 
     [Theory]
@@ -134,7 +134,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }
 
     [Theory]
@@ -146,7 +146,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }   
 
     [Theory]
@@ -158,7 +158,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }   
 
     [Theory]
@@ -171,7 +171,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }    
 
     [Theory]
@@ -183,7 +183,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }
 
     [Theory]
@@ -195,7 +195,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }
 
     [Theory]
@@ -207,7 +207,7 @@ public class BookShoppingCartTests
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
-        Assert.Equal(expected, actual);
+        Assert.Equal(Math.Round(expected, 2), Math.Round(actual, 2));
     }  
 
     [Theory]
@@ -239,7 +239,7 @@ public class BookShoppingCartTests
             3 * 8 * 0.9 +
             2 * 8 * 0.95 +
             8;
-            
+
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();

@@ -1,6 +1,12 @@
-
 public class BookShoppingCart
 {
+    const int baseBookPriceInEuro = 8;
+    const float noDiscount = 1;
+    const float twoDifferentBooksDiscount = 0.95f;
+    const float threeDifferentBooksDiscount = 0.9f;
+    const float fourDifferentBooksDiscount = 0.8f;
+    const float fiveDifferentBooksDiscount = 0.75f;
+
     private List<int> cartItems = [];
     public int Count => cartItems.Count;
     public bool Add(int bookId)
@@ -25,23 +31,23 @@ public class BookShoppingCart
             {
                 if (groups.Count == 1)
                 {
-                    cost += minCommonCount * 8;
+                    cost += minCommonCount * baseBookPriceInEuro;
                 }
                 else if (groups.Count == 2)
                 {
-                    cost += minCommonCount * 8 * 0.95;
+                    cost += minCommonCount * baseBookPriceInEuro * twoDifferentBooksDiscount;
                 }
                 else if (groups.Count == 3)
                 {
-                    cost += minCommonCount * 8 * 0.9;
+                    cost += minCommonCount * baseBookPriceInEuro * threeDifferentBooksDiscount;
                 }
                 else if (groups.Count == 4)
                 {
-                    cost += minCommonCount * 8 * 0.8;
+                    cost += minCommonCount * baseBookPriceInEuro * fourDifferentBooksDiscount;
                 }
                 else if (groups.Count == 5)
                 {
-                    cost += minCommonCount * 8 * 0.75;
+                    cost += minCommonCount * baseBookPriceInEuro * fiveDifferentBooksDiscount;
                 }
                 groups[group.Key] -= minCommonCount;
 
@@ -53,4 +59,12 @@ public class BookShoppingCart
         }
         return cost;
     }
+    public float DetermineDiscount(int numDiffBooks) => numDiffBooks switch
+    {
+        2 => twoDifferentBooksDiscount,
+        3 => threeDifferentBooksDiscount,
+        4 => fourDifferentBooksDiscount,
+        5 => fiveDifferentBooksDiscount,
+        _ => noDiscount
+    };
 }

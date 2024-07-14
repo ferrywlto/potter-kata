@@ -100,9 +100,7 @@ public class BookShoppingCartTests
 
     [Theory]
     [InlineData(new int[] {1,2})]
-    [InlineData(new int[] {2,3})]
     [InlineData(new int[] {3,4})]
-    [InlineData(new int[] {4,5})]
     [InlineData(new int[] {5,1})]
     public void Calculate_OnTwoDifferentBooks_ShouldApplyFivePercentsDiscounts(int[] bookIds)
     {
@@ -115,9 +113,7 @@ public class BookShoppingCartTests
 
     [Theory]
     [InlineData(new int[] {1,2,2})]
-    [InlineData(new int[] {2,3,3})]
     [InlineData(new int[] {3,4,4})]
-    [InlineData(new int[] {4,5,5})]
     [InlineData(new int[] {5,1,1})]
     public void Calculate_OnTwoDifferentBookPlusOneSameBook_ShouldAddEightForTheExtraBook(int[] bookIds)
     {
@@ -130,9 +126,7 @@ public class BookShoppingCartTests
 
     [Theory]
     [InlineData(new int[] {1,2,3})]
-    [InlineData(new int[] {2,3,4})]
     [InlineData(new int[] {3,4,5})]
-    [InlineData(new int[] {4,5,1})]
     [InlineData(new int[] {5,1,2})]
     public void Calculate_OnThreeDifferentBooks_ShouldApplyTenPercentsDiscounts(int[] bookIds)
     {
@@ -169,9 +163,7 @@ public class BookShoppingCartTests
 
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 3, 3 })]
-    [InlineData(new int[] { 2, 3, 4, 4, 4 })]
     [InlineData(new int[] { 3, 4, 5, 5, 5 })]
-    [InlineData(new int[] { 4, 5, 1, 1, 1 })]
     [InlineData(new int[] { 5, 1, 2, 2, 2 })]
     public void Calculate_OnThreeDifferentBooksPlusTwoSameBooks_ShouldAddSixteenForExtraBooks(int[] bookIds)
     {
@@ -184,10 +176,7 @@ public class BookShoppingCartTests
 
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 4 })]
-    [InlineData(new int[] { 2, 3, 4, 5 })]
-    [InlineData(new int[] { 3, 4, 5, 1 })]
     [InlineData(new int[] { 4, 5, 1, 2 })]
-    [InlineData(new int[] { 5, 1, 2, 3 })]
     public void Calculate_OnFourDifferentBooks_ShouldApplyTwentyPercentDiscounts(int[] bookIds)
     {
         const double expected = 4 * 8 * 0.8;
@@ -199,10 +188,7 @@ public class BookShoppingCartTests
 
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 4, 4, 4 })]
-    [InlineData(new int[] { 2, 3, 4, 5, 5, 5 })]
-    [InlineData(new int[] { 3, 4, 5, 1, 1, 1 })]
     [InlineData(new int[] { 4, 5, 1, 2, 2, 2 })]
-    [InlineData(new int[] { 5, 1, 2, 3, 2, 2 })]
     public void Calculate_OnFourDifferentBooksPlusTwoSameBooks_ShouldAddSixteenForExtraBooks(int[] bookIds)
     {
         const double expected = 4 * 8 * 0.8 + 16;

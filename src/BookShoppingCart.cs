@@ -26,30 +26,11 @@ public class BookShoppingCart
 
         while(groups.Count > 0)
         {
+            cost += minCommonCount * groups.Count * baseBookPriceInEuro * DetermineDiscount(groups.Count);
+            
             var emptyBookIds = new List<int>();
             foreach(var group in groups)
             {
-                cost += minCommonCount * baseBookPriceInEuro * DetermineDiscount(groups.Count);
-                // if (groups.Count == 1)
-                // {
-                //     cost += minCommonCount * baseBookPriceInEuro;
-                // }
-                // else if (groups.Count == 2)
-                // {
-                //     cost += minCommonCount * baseBookPriceInEuro * twoDifferentBooksDiscount;
-                // }
-                // else if (groups.Count == 3)
-                // {
-                //     cost += minCommonCount * baseBookPriceInEuro * threeDifferentBooksDiscount;
-                // }
-                // else if (groups.Count == 4)
-                // {
-                //     cost += minCommonCount * baseBookPriceInEuro * fourDifferentBooksDiscount;
-                // }
-                // else if (groups.Count == 5)
-                // {
-                //     cost += minCommonCount * baseBookPriceInEuro * fiveDifferentBooksDiscount;
-                // }
                 groups[group.Key] -= minCommonCount;
 
                 if (groups[group.Key] == 0)

@@ -104,9 +104,9 @@ public class BookShoppingCartTests
     [InlineData(new int[] {3,4})]
     [InlineData(new int[] {4,5})]
     [InlineData(new int[] {5,1})]
-    public void Calculate_OnTwoDifferentBooks_ShouldHaveTenPercentsDiscounts(int[] bookIds)
+    public void Calculate_OnTwoDifferentBooks_ShouldHaveFivePercentsDiscounts(int[] bookIds)
     {
-        const double expected = 2 * 8 * 0.9;
+        const double expected = 2 * 8 * 0.95;
         var sut = new BookShoppingCart();
         foreach(var id in bookIds) sut.Add(id);
         var actual = sut.Calculate();
